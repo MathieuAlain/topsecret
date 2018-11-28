@@ -13,10 +13,10 @@
 # - Vous ne pouvez PAS changer la structure du code, importer d'autres
 #       modules / sous-modules, ou ajouter d'autres fichiers Python
 # - Ne touchez pas aux variables, TMAX*, ERRMAX* et _times, à la fonction
-#       checkTime, ni aux conditions vérifiant le bon fonctionnement de votre 
-#       code. Ces structures vous permettent de savoir rapidement si vous ne 
-#       respectez pas les requis minimum pour une question en particulier. 
-#       Toute sous-question n'atteignant pas ces minimums se verra attribuer 
+#       checkTime, ni aux conditions vérifiant le bon fonctionnement de votre
+#       code. Ces structures vous permettent de savoir rapidement si vous ne
+#       respectez pas les requis minimum pour une question en particulier.
+#       Toute sous-question n'atteignant pas ces minimums se verra attribuer
 #       la note de zéro (0) pour la partie implémentation!
 #
 ###############################################################################
@@ -38,12 +38,14 @@ from sklearn.datasets import make_gaussian_quantiles, make_moons
 
 # Fonctions utilitaires liées à l'évaluation
 _times = []
+
+
 def checkTime(maxduration, question):
     duration = _times[-1] - _times[-2]
     if duration > maxduration:
-        print("[ATTENTION] Votre code pour la question {0} met trop de temps à s'exécuter! ".format(question)+
-            "Le temps maximum permis est de {0:.4f} secondes, mais votre code a requis {1:.4f} secondes! ".format(maxduration,duration)+
-            "Assurez-vous que vous ne faites pas d'appels bloquants (par exemple à show()) dans cette boucle!") 
+        print("[ATTENTION] Votre code pour la question {0} met trop de temps à s'exécuter! ".format(question) +
+              "Le temps maximum permis est de {0:.4f} secondes, mais votre code a requis {1:.4f} secondes! ".format(maxduration, duration) +
+              "Assurez-vous que vous ne faites pas d'appels bloquants (par exemple à show()) dans cette boucle!")
 
 # Définition des durées d'exécution maximales pour chaque sous-question
 TMAX_Q3Ai = 60
@@ -58,8 +60,8 @@ if __name__ == "__main__":
     # Création du jeu de données
     # Ne modifiez pas ces lignes
     X1, y1 = make_gaussian_quantiles(cov=2.2,
-                                    n_samples=600, n_features=2,
-                                    n_classes=2, random_state=42)
+                                     n_samples=600, n_features=2,
+                                     n_classes=2, random_state=42)
     X2, y2 = make_moons(n_samples=300, noise=0.25, random_state=42)
     X3, y3 = make_moons(n_samples=300, noise=0.3, random_state=42)
     X2[:, 0] -= 3.5
@@ -67,7 +69,7 @@ if __name__ == "__main__":
     X3[:, 0] += 4.0
     X3[:, 1] += 2.0
     X = numpy.concatenate((X1, X2, X3))
-    y = numpy.concatenate((y1, y2+2, y3+1))
+    y = numpy.concatenate((y1, y2 + 2, y3 + 1))
 
     # Division du jeu en entraînement / test
     # Ne modifiez pas la random seed
@@ -76,41 +78,28 @@ if __name__ == "__main__":
     _times.append(time.time())
     # TODO Q3A
     # Entraînez un classifieur par ensemble de type AdaBoost sur le jeu de données (X_train, y_train)
-    # défini plus haut, en utilisant des souches de décision comme classifieur de base. 
+    # défini plus haut, en utilisant des souches de décision comme classifieur de base.
     # Rapportez les résultats et figures tel que demandé dans l'énoncé, sur
     # les jeux d'entraînement et de test.
-
-    
-
-
-
 
     _times.append(time.time())
     checkTime(TMAX_Q3Ai, "3A avec souches")
 
-
     # TODO Q3A
     # Entraînez un classifieur par ensemble de type AdaBoost sur le jeu de données (X_train, y_train)
-    # défini plus haut, en utilisant des arbres de décision de profonduer 3 comme 
+    # défini plus haut, en utilisant des arbres de décision de profonduer 3 comme
     # classifieur de base. Rapportez les résultats et figures tel que demandé dans l'énoncé, sur
     # les jeux d'entraînement et de test.
 
-
-
     _times.append(time.time())
     checkTime(TMAX_Q3Aii, "3A avec arbres de profondeur 3")
-
 
     # TODO Q3C
     # Entraînez un classifieur par ensemble de type Random Forest sur le jeu de données (X_train, y_train)
     # défini plus haut. Rapportez les résultats et figures tel que demandé dans l'énoncé, sur
     # les jeux d'entraînement et de test.
-    
-
-
-    
 
     _times.append(time.time())
     checkTime(TMAX_Q3C, "3C")
-    
+
 # N'écrivez pas de code à partir de cet endroit

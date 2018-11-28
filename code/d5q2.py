@@ -13,10 +13,10 @@
 # - Vous ne pouvez PAS changer la structure du code, importer d'autres
 #       modules / sous-modules, ou ajouter d'autres fichiers Python
 # - Ne touchez pas aux variables, TMAX*, ERRMAX* et _times, à la fonction
-#       checkTime, ni aux conditions vérifiant le bon fonctionnement de votre 
-#       code. Ces structures vous permettent de savoir rapidement si vous ne 
-#       respectez pas les requis minimum pour une question en particulier. 
-#       Toute sous-question n'atteignant pas ces minimums se verra attribuer 
+#       checkTime, ni aux conditions vérifiant le bon fonctionnement de votre
+#       code. Ces structures vous permettent de savoir rapidement si vous ne
+#       respectez pas les requis minimum pour une question en particulier.
+#       Toute sous-question n'atteignant pas ces minimums se verra attribuer
 #       la note de zéro (0) pour la partie implémentation!
 #
 ###############################################################################
@@ -43,12 +43,14 @@ from sklearn.mixture import GaussianMixture
 
 # Fonctions utilitaires liées à l'évaluation
 _times = []
+
+
 def checkTime(maxduration, question):
     duration = _times[-1] - _times[-2]
     if duration > maxduration:
-        print("[ATTENTION] Votre code pour la question {0} met trop de temps à s'exécuter! ".format(question)+
-            "Le temps maximum permis est de {0:.4f} secondes, mais votre code a requis {1:.4f} secondes! ".format(maxduration,duration)+
-            "Assurez-vous que vous ne faites pas d'appels bloquants (par exemple à show()) dans cette boucle!") 
+        print("[ATTENTION] Votre code pour la question {0} met trop de temps à s'exécuter! ".format(question) +
+              "Le temps maximum permis est de {0:.4f} secondes, mais votre code a requis {1:.4f} secondes! ".format(maxduration, duration) +
+              "Assurez-vous que vous ne faites pas d'appels bloquants (par exemple à show()) dans cette boucle!")
 
 # Définition des durées d'exécution maximales pour chaque sous-question
 TMAX_Q2Aall = 0.5
@@ -82,9 +84,6 @@ if __name__ == "__main__":
     # Entraînez un classifieur SVM linéaire sur le jeu de données *complet*
     # et rapportez sa performance en test
 
-
-
-
     _times.append(time.time())
     checkTime(TMAX_Q2Aall, "2A (avec toutes les variables)")
 
@@ -93,40 +92,23 @@ if __name__ == "__main__":
     # en réduisant le nombre de caractéristiques (features) à 10 en
     # utilisant le chi² comme métrique et rapportez sa performance en test
 
-
-
-
-
     _times.append(time.time())
     checkTime(TMAX_Q2Achi, "2A (avec sous-ensemble de variables par chi2)")
 
-    
     # TODO Q2A
     # Entraînez un classifieur SVM linéaire sur le jeu de données
     # en réduisant le nombre de caractéristiques (features) à 10 en utilisant
     # l'information mutuelle comme métrique et rapportez sa performance en test
 
-
-
-
-
-
-
     _times.append(time.time())
     checkTime(TMAX_Q2Amut, "2A (avec sous-ensemble de variables par mutual info)")
-
 
     # TODO Q2B
     # Entraînez un classifieur SVM linéaire sur le jeu de données
     # en réduisant le nombre de caractéristiques (features) à 10 par
     # sélection séquentielle arrière et rapportez sa performance en test
 
-
-
-
-
-    
     _times.append(time.time())
     checkTime(TMAX_Q2B, "2B")
-    
+
 # N'écrivez pas de code à partir de cet endroit

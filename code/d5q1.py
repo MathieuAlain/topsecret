@@ -13,10 +13,10 @@
 # - Vous ne pouvez PAS changer la structure du code, importer d'autres
 #       modules / sous-modules, ou ajouter d'autres fichiers Python
 # - Ne touchez pas aux variables, TMAX*, ERRMAX* et _times, à la fonction
-#       checkTime, ni aux conditions vérifiant le bon fonctionnement de votre 
-#       code. Ces structures vous permettent de savoir rapidement si vous ne 
-#       respectez pas les requis minimum pour une question en particulier. 
-#       Toute sous-question n'atteignant pas ces minimums se verra attribuer 
+#       checkTime, ni aux conditions vérifiant le bon fonctionnement de votre
+#       code. Ces structures vous permettent de savoir rapidement si vous ne
+#       respectez pas les requis minimum pour une question en particulier.
+#       Toute sous-question n'atteignant pas ces minimums se verra attribuer
 #       la note de zéro (0) pour la partie implémentation!
 #
 ###############################################################################
@@ -38,12 +38,14 @@ from sklearn.mixture import GaussianMixture
 
 # Fonctions utilitaires liées à l'évaluation
 _times = []
+
+
 def checkTime(maxduration, question):
     duration = _times[-1] - _times[-2]
     if duration > maxduration:
-        print("[ATTENTION] Votre code pour la question {0} met trop de temps à s'exécuter! ".format(question)+
-            "Le temps maximum permis est de {0:.4f} secondes, mais votre code a requis {1:.4f} secondes! ".format(maxduration,duration)+
-            "Assurez-vous que vous ne faites pas d'appels bloquants (par exemple à show()) dans cette boucle!") 
+        print("[ATTENTION] Votre code pour la question {0} met trop de temps à s'exécuter! ".format(question) +
+              "Le temps maximum permis est de {0:.4f} secondes, mais votre code a requis {1:.4f} secondes! ".format(maxduration, duration) +
+              "Assurez-vous que vous ne faites pas d'appels bloquants (par exemple à show()) dans cette boucle!")
 
 # Définition des durées d'exécution maximales pour chaque sous-question
 TMAX_Q1A = 15
@@ -69,17 +71,11 @@ if __name__ == "__main__":
     # - La mesure V
     # Voyez l'énoncé pour plus de détails sur ces scores.
 
-
-
-
     pyplot.figure()
     # TODO Q1A
     # Évaluez ici la performance de K-means en utilisant la fonction `evalKmeans`
     # définie plus haut, en faisant varier le nombre de clusters entre 2 et 50
     # par incrément de 2. Tracez les résultats obtenus sous forme de courbe
-
-
-
 
     _times.append(time.time())
     checkTime(TMAX_Q1A, "1A")
@@ -87,12 +83,10 @@ if __name__ == "__main__":
     # On affiche la courbe obtenue
     pyplot.show()
 
-
-
     _times.append(time.time())
     # TODO Q1B
     # Écrivez ici une fonction nommée `evalEM(X, y, k, init)`, qui prend en paramètre
-    # un jeu de données (`X` et `y`), le nombre de clusters à utiliser `k` 
+    # un jeu de données (`X` et `y`), le nombre de clusters à utiliser `k`
     # et l'initialisation demandée ('random' ou 'kmeans') et qui
     # retourne un tuple de 3 éléments, à savoir les scores basés sur :
     # - L'indice de Rand ajusté
@@ -103,27 +97,20 @@ if __name__ == "__main__":
     # la question 1B pour déterminer les étiquettes de classe, avant de passer
     # les résultats aux différentes métriques!
 
-
-
-
     pyplot.figure()
     # TODO Q1B
     # Évaluez ici la performance de EM en utilisant la fonction `evalEM`
     # définie plus haut, en faisant varier le nombre de clusters entre 2 et 50
-    # par incrément de 2 et en utilisant une initialisation aléatoire. 
+    # par incrément de 2 et en utilisant une initialisation aléatoire.
     # Tracez les résultats obtenus sous forme de courbe
     # Notez que ce calcul est assez long et devrait requérir au moins 120 secondes;
     # la limite de temps qui vous est accordée est beaucoup plus laxiste.
-
-
-
 
     _times.append(time.time())
     checkTime(TMAX_Q1B, "1B")
 
     # On affiche la courbe obtenue
     pyplot.show()
-
 
     _times.append(time.time())
     pyplot.figure()
@@ -135,15 +122,11 @@ if __name__ == "__main__":
     # Notez que ce calcul est assez long et devrait requérir au moins 120 secondes;
     # la limite de temps qui vous est accordée est beaucoup plus laxiste.
 
-
-
-
-
     _times.append(time.time())
     checkTime(TMAX_Q1C, "1C")
 
     # On affiche la courbe obtenue
     pyplot.show()
 
-    
+
 # N'écrivez pas de code à partir de cet endroit

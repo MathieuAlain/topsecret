@@ -13,10 +13,10 @@
 # - Vous ne pouvez PAS changer la structure du code, importer d'autres
 #       modules / sous-modules, ou ajouter d'autres fichiers Python
 # - Ne touchez pas aux variables, TMAX*, ERRMAX* et _times, à la fonction
-#       checkTime, ni aux conditions vérifiant le bon fonctionnement de votre 
-#       code. Ces structures vous permettent de savoir rapidement si vous ne 
-#       respectez pas les requis minimum pour une question en particulier. 
-#       Toute sous-question n'atteignant pas ces minimums se verra attribuer 
+#       checkTime, ni aux conditions vérifiant le bon fonctionnement de votre
+#       code. Ces structures vous permettent de savoir rapidement si vous ne
+#       respectez pas les requis minimum pour une question en particulier.
+#       Toute sous-question n'atteignant pas ces minimums se verra attribuer
 #       la note de zéro (0) pour la partie implémentation!
 #
 ###############################################################################
@@ -59,8 +59,8 @@ def plot_clustering(X_red, labels, title, savepath):
     pyplot.figure(figsize=(9, 6), dpi=160)
     for i in range(X_red.shape[0]):
         pyplot.text(X_red[i, 0], X_red[i, 1], str(y[i]),
-                color=pyplot.cm.nipy_spectral(labels[i] / 10.),
-                fontdict={'weight': 'bold', 'size': 9})
+                    color=pyplot.cm.nipy_spectral(labels[i] / 10.),
+                    fontdict={'weight': 'bold', 'size': 9})
 
     pyplot.xticks([])
     pyplot.yticks([])
@@ -80,20 +80,12 @@ if __name__ == "__main__":
     # TODO Q4
     # Écrivez le code permettant de projeter le jeu de données en 2 dimensions
     # avec les classes scikit-learn suivantes : PCA, MDS et TSNE
-    
-
-
-
 
     # TODO Q4
     # Calculez le ratio entre la distance moyenne intra-classe et la distance moyenne
     # inter-classe, pour chacune des classes, pour chacune des méthodes, y compris
     # le jeu de données original. Utilisez une distance euclidienne.
     # La fonction cdist importée plus haut pourrait vous être utile
-
-    
-
-
 
     # TODO Q4
     # Utilisez la fonction plot_clustering pour afficher les résultats des
