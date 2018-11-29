@@ -84,9 +84,26 @@ if __name__ == "__main__":
     # Évaluez ici la performance de K-means en utilisant la fonction `evalKmeans`
     # définie plus haut, en faisant varier le nombre de clusters entre 2 et 50
     # par incrément de 2. Tracez les résultats obtenus sous forme de courbe
+    kVec = []
+    randVec = []
+    mutualVec = []
+    vmeasureVec = []
+
     for k in range(2, 51, 2):
         rand, mutual_information, v_measure = evalKmeans(X, y, k)
-
+        randVec.append(rand)
+        mutualVec.append(mutual_information)
+        vmeasureVec.append(v_measure)
+        kVec.append(k)
+    pyplot.xlabel('Nombre de clusters k')
+    pyplot.ylabel('Score')
+    
+    a = pyplot.plot(kVec,randVec,label='adjusted_rand_score')
+    b = pyplot.plot(kVec,mutualVec,label='adjusted_rand_score')
+    c =pyplot.plot(kVec,vmeasureVec,label='adjusted_rand_score')
+    
+    pyplot.legend([a,b,c], ['adjusted_rand_score', 'adjusted_mutual_info_score', 'v_measure_score'])
+    
     _times.append(time.time())
     checkTime(TMAX_Q1A, "1A")
 
@@ -123,7 +140,7 @@ if __name__ == "__main__":
     # Notez que ce calcul est assez long et devrait requérir au moins 120 secondes;
     # la limite de temps qui vous est accordée est beaucoup plus laxiste.
     for k in range(2, 51, 2):
-        rand, mutual_information, v_measure = evalEM(X, y, k, init)
+        rand, mutual_information, v_measure = evalEM(X, y, k, 'random')
 
     _times.append(time.time())
     checkTime(TMAX_Q1B, "1B")
