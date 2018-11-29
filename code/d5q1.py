@@ -70,12 +70,16 @@ if __name__ == "__main__":
     # - L'information mutuelle
     # - La mesure V
     # Voyez l'énoncé pour plus de détails sur ces scores.
+    def evalKmeans(X, y, k):
+        km = KMeans(n_clusters=k)
 
     pyplot.figure()
     # TODO Q1A
     # Évaluez ici la performance de K-means en utilisant la fonction `evalKmeans`
     # définie plus haut, en faisant varier le nombre de clusters entre 2 et 50
     # par incrément de 2. Tracez les résultats obtenus sous forme de courbe
+    for k in range(2, 52, 2):
+        rand, mutual_information, v_measure = evalKmeans(X, y, k)
 
     _times.append(time.time())
     checkTime(TMAX_Q1A, "1A")
