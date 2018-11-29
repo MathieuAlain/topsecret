@@ -72,13 +72,19 @@ if __name__ == "__main__":
     # Voyez l'énoncé pour plus de détails sur ces scores.
     def evalKmeans(X, y, k):
         km = KMeans(n_clusters=k)
-
+        y_predict = km.fit_predict(X,y)
+        mesureV = v_measure_score(y,y_predict)
+        randAjustee = adjusted_rand_score(y,y_predict)
+        infoMutuelle = adjusted_mutual_info_score(y,y_predict)
+        
+        return randAjustee, infoMutuelle, mesureV
+    
     pyplot.figure()
     # TODO Q1A
     # Évaluez ici la performance de K-means en utilisant la fonction `evalKmeans`
     # définie plus haut, en faisant varier le nombre de clusters entre 2 et 50
     # par incrément de 2. Tracez les résultats obtenus sous forme de courbe
-    for k in range(2, 52, 2):
+    for k in range(2, 51, 2):
         rand, mutual_information, v_measure = evalKmeans(X, y, k)
 
     _times.append(time.time())
@@ -100,6 +106,13 @@ if __name__ == "__main__":
     # N'oubliez pas que vous devez d'abord implémenter les équations fournies à
     # la question 1B pour déterminer les étiquettes de classe, avant de passer
     # les résultats aux différentes métriques!
+    def evalEM(X, y, k, init):
+        GM = GaussianMixture(n_clusters=k)
+        y_predict = GM.fit_predict(X,y)
+        mesureV = v_measure_score(y,y_predict)
+        randAjustee = adjusted_rand_score(y,y_predict)
+        infoMutuelle = adjusted_mutual_info_score(y,y_predict)
+        return randAjustee, infoMutuelle, mesureV
 
     pyplot.figure()
     # TODO Q1B
@@ -109,6 +122,8 @@ if __name__ == "__main__":
     # Tracez les résultats obtenus sous forme de courbe
     # Notez que ce calcul est assez long et devrait requérir au moins 120 secondes;
     # la limite de temps qui vous est accordée est beaucoup plus laxiste.
+    for k in range(2, 51, 2):
+        rand, mutual_information, v_measure = evalEM(X, y, k, init)
 
     _times.append(time.time())
     checkTime(TMAX_Q1B, "1B")
