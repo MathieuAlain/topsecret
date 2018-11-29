@@ -81,6 +81,8 @@ if __name__ == "__main__":
     # défini plus haut, en utilisant des souches de décision comme classifieur de base.
     # Rapportez les résultats et figures tel que demandé dans l'énoncé, sur
     # les jeux d'entraînement et de test.
+    base_estimator = DecisionTreeClassifier(max_depth=1)
+    clf = AdaBoostClassifier(base_estimator=base_estimator)
 
     _times.append(time.time())
     checkTime(TMAX_Q3Ai, "3A avec souches")
