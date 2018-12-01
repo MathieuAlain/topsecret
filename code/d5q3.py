@@ -89,11 +89,24 @@ if __name__ == "__main__":
         print(f"AdaBoost train score with {n_estimators_count} estimators: {score}.")
         scores.append(score)
         n_estimators_count += 1
+    fig, ax = pyplot.subplots()
+    ax.plot(range(1, 51), scores)
+    ax.set_title("Performance en entraînement avec AdaBoost")
+    ax.set_xlabel("Nombre de classifieurs de base")
+    ax.set_ylabel("Performance en entraînement")
+    fig.show()
+    scores = []
     n_estimators_count = 1
     for score in clf.staged_score(X_test, y_test):
         print(f"AdaBoost test score with {n_estimators_count} estimators: {score}.")
         scores.append(score)
         n_estimators_count += 1
+    fig, ax = pyplot.subplots()
+    ax.plot(range(1, 51), scores)
+    ax.set_title("Performance en test avec AdaBoost")
+    ax.set_xlabel("Nombre de classifieurs de base")
+    ax.set_ylabel("Performance en test")
+    fig.show()
 
     _times.append(time.time())
     checkTime(TMAX_Q3Ai, "3A avec souches")
