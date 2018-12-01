@@ -81,8 +81,20 @@ if __name__ == "__main__":
     # défini plus haut, en utilisant des souches de décision comme classifieur de base.
     # Rapportez les résultats et figures tel que demandé dans l'énoncé, sur
     # les jeux d'entraînement et de test.
-    base_estimator = DecisionTreeClassifier(max_depth=1)
-    clf = AdaBoostClassifier(base_estimator=base_estimator)
+    ns_estimators = range(1, 51)
+    clf = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=1), n_estimators=50)
+    clf.fit(X_train, y_train)
+    scores = []
+    n_estimators_count = 1
+    for score in clf.staged_score(X_train, y_train):
+        print(f"AdaBoost train score with {n_estimators_count} estimators: {score}.")
+        scores.append(score)
+        n_estimators_count += 1
+    n_estimators_count = 1
+    for score in clf.staged_score(X_test, y_test):
+        print(f"AdaBoost test score with {n_estimators_count} estimators: {score}.")
+        scores.append(score)
+        n_estimators_count += 1
 
     _times.append(time.time())
     checkTime(TMAX_Q3Ai, "3A avec souches")
