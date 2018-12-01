@@ -81,7 +81,8 @@ if __name__ == "__main__":
     # défini plus haut, en utilisant des souches de décision comme classifieur de base.
     # Rapportez les résultats et figures tel que demandé dans l'énoncé, sur
     # les jeux d'entraînement et de test.
-    clf = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=1), n_estimators=50)
+    n_estimators = 50
+    clf = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=1), n_estimators=n_estimators)
     clf.fit(X_train, y_train)
     scores = []
     n_estimators_count = 1
@@ -90,7 +91,7 @@ if __name__ == "__main__":
         scores.append(score)
         n_estimators_count += 1
     fig, ax = pyplot.subplots()
-    ax.plot(range(1, 51), scores)
+    ax.plot(range(1, n_estimators + 1), scores)
     ax.set_title("Performance en entraînement avec AdaBoost")
     ax.set_xlabel("Nombre de classifieurs de base")
     ax.set_ylabel("Performance en entraînement")
@@ -102,11 +103,28 @@ if __name__ == "__main__":
         scores.append(score)
         n_estimators_count += 1
     fig, ax = pyplot.subplots()
-    ax.plot(range(1, 51), scores)
+    ax.plot(range(1, n_estimators + 1), scores)
     ax.set_title("Performance en test avec AdaBoost")
     ax.set_xlabel("Nombre de classifieurs de base")
     ax.set_ylabel("Performance en test")
     fig.show()
+    n_estimators_count = 1
+    for predictions in clf.staged_predict(X_test):
+        if n_estimators_count % n_estimators // 3 == 0:
+            x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+            y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+            xx, yy = numpy.meshgrid(
+                numpy.arange(x_min, x_max, 0.1),
+                numpy.arange(y_min, y_max, 0.1)
+            )
+            fig, ax = pyplot.subplots()
+            Z = clf.predict(numpy.c_[xx.ravel(), yy.ravel()])
+            Z = Z.reshape(xx.shape)
+            ax.contourf(xx, yy, Z, alpha=0.4)
+            ax.scatter(X[:, 0], X[:, 1], c=y, s=20, edgecolor='k')
+            ax.set_title(f"Régions de décision générées par AdaBoost avec {n_estimators_count} estimateurs")
+            fig.show()
+        n_estimators_count += 1
 
     _times.append(time.time())
     checkTime(TMAX_Q3Ai, "3A avec souches")
