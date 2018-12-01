@@ -81,7 +81,6 @@ if __name__ == "__main__":
     # défini plus haut, en utilisant des souches de décision comme classifieur de base.
     # Rapportez les résultats et figures tel que demandé dans l'énoncé, sur
     # les jeux d'entraînement et de test.
-    ns_estimators = range(1, 51)
     clf = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=1), n_estimators=50)
     clf.fit(X_train, y_train)
     scores = []
