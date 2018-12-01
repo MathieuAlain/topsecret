@@ -79,12 +79,12 @@ if __name__ == "__main__":
         
         return randAjustee, infoMutuelle, mesureV
     
-    pyplot.figure()
+    #pyplot.figure()
     # TODO Q1A
     # Évaluez ici la performance de K-means en utilisant la fonction `evalKmeans`
     # définie plus haut, en faisant varier le nombre de clusters entre 2 et 50
     # par incrément de 2. Tracez les résultats obtenus sous forme de courbe
-    kVec = []
+    kVec = numpy.arange(2, 51, 2)
     randVec = []
     mutualVec = []
     vmeasureVec = []
@@ -94,21 +94,20 @@ if __name__ == "__main__":
         randVec.append(rand)
         mutualVec.append(mutual_information)
         vmeasureVec.append(v_measure)
-        kVec.append(k)
-    pyplot.xlabel('Nombre de clusters k')
-    pyplot.ylabel('Score')
-    
-    a = pyplot.plot(kVec,randVec,label='adjusted_rand_score', )
-    b = pyplot.plot(kVec,mutualVec,label='adjusted_rand_score')
-    c =pyplot.plot(kVec,vmeasureVec,label='adjusted_rand_score')
-    
-    pyplot.legend([a,b,c], ['adjusted_rand_score', 'adjusted_mutual_info_score', 'v_measure_score'])
-    
+        
+    fig, axs = pyplot.subplots(1, 3, constrained_layout=True)
+    axs[0].set_xlabel('Nombre de clusters k')
+    axs[0].set_ylabel('Score')
+    axs[0].set_title("Question 1-A")
+    axs[0].plot(kVec,randVec,label='adjusted_rand_score', )
+    axs[0].plot(kVec,mutualVec,label='adjusted_rand_score')
+    axs[0].plot(kVec,vmeasureVec,label='adjusted_rand_score')
+        
     _times.append(time.time())
     checkTime(TMAX_Q1A, "1A")
 
     # On affiche la courbe obtenue
-    pyplot.show()
+    #pyplot.show()
 
     _times.append(time.time())
     # TODO Q1B
@@ -131,7 +130,7 @@ if __name__ == "__main__":
         infoMutuelle = adjusted_mutual_info_score(y,y_predict)
         return randAjustee, infoMutuelle, mesureV
 
-    pyplot.figure()
+    #pyplot.figure()
     # TODO Q1B
     # Évaluez ici la performance de EM en utilisant la fonction `evalEM`
     # définie plus haut, en faisant varier le nombre de clusters entre 2 et 50
@@ -144,27 +143,25 @@ if __name__ == "__main__":
     mutualVec = []
     vmeasureVec = []
     for k in range(2, 51, 2):
-        rand, mutual_information, v_measure = evalEM(X, y, k, 'random')
+        rand, mutual_information, v_measure = evalEM(X, y, k, 'kmeans')
         randVec.append(rand)
         mutualVec.append(mutual_information)
         vmeasureVec.append(v_measure)
 
     _times.append(time.time())
     checkTime(TMAX_Q1B, "1B")
-    pyplot.xlabel('Nombre de clusters k')
-    pyplot.ylabel('Score')
-    
-    a = pyplot.plot(kVec,randVec,label='adjusted_rand_score' )
-    b = pyplot.plot(kVec,mutualVec,label='adjusted_rand_score')
-    c = pyplot.plot(kVec,vmeasureVec,label='adjusted_rand_score')
-    
-    pyplot.legend([a,b,c], ['adjusted_rand_score', 'adjusted_mutual_info_score', 'v_measure_score'])
+    axs[1].set_xlabel('Nombre de clusters k')
+    axs[1].set_ylabel('Score')
+    axs[1].set_title("Question 1-B")    
+    axs[1].plot(kVec,randVec,label='adjusted_rand_score' )
+    axs[1].plot(kVec,mutualVec,label='adjusted_rand_score')
+    axs[1].plot(kVec,vmeasureVec,label='adjusted_rand_score')
     
     # On affiche la courbe obtenue
-    pyplot.show()
+    #pyplot.show()
 
     _times.append(time.time())
-    pyplot.figure()
+    #pyplot.figure()
     # TODO Q1C
     # Évaluez ici la performance de EM en utilisant la fonction `evalEM`
     # définie plus haut, en faisant varier le nombre de clusters entre 2 et 50
@@ -172,12 +169,29 @@ if __name__ == "__main__":
     # Tracez les résultats obtenus sous forme de courbe
     # Notez que ce calcul est assez long et devrait requérir au moins 120 secondes;
     # la limite de temps qui vous est accordée est beaucoup plus laxiste.
+    randVec = []
+    mutualVec = []
+    vmeasureVec = []
+    for k in range(2, 51, 2):
+        rand, mutual_information, v_measure = evalEM(X, y, k, 'random')
+        randVec.append(rand)
+        mutualVec.append(mutual_information)
+        vmeasureVec.append(v_measure)
 
+    _times.append(time.time())
+    checkTime(TMAX_Q1B, "1B")
+    axs[2].set_xlabel('Nombre de clusters k')
+    axs[2].set_ylabel('Score')
+    axs[2].set_title("Question 1-C")    
+    axs[2].plot(kVec,randVec,label='adjusted_rand_score' )
+    axs[2].plot(kVec,mutualVec,label='adjusted_rand_score')
+    axs[2].plot(kVec,vmeasureVec,label='adjusted_rand_score')
+    
+    
     _times.append(time.time())
     checkTime(TMAX_Q1C, "1C")
 
     # On affiche la courbe obtenue
     pyplot.show()
-
 
 # N'écrivez pas de code à partir de cet endroit
