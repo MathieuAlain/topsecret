@@ -124,7 +124,7 @@ if __name__ == "__main__":
     # la question 1B pour déterminer les étiquettes de classe, avant de passer
     # les résultats aux différentes métriques!
     def evalEM(X, y, k, init):
-        GM = GaussianMixture(n_components=k, init_params='random').fit(X,y)
+        GM = GaussianMixture(n_components=k, init_params=init).fit(X,y)
         y_predict = GM.predict(X)
         mesureV = v_measure_score(y,y_predict)
         randAjustee = adjusted_rand_score(y,y_predict)
