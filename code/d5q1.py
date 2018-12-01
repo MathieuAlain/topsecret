@@ -98,7 +98,7 @@ if __name__ == "__main__":
     pyplot.xlabel('Nombre de clusters k')
     pyplot.ylabel('Score')
     
-    a = pyplot.plot(kVec,randVec,label='adjusted_rand_score')
+    a = pyplot.plot(kVec,randVec,label='adjusted_rand_score', )
     b = pyplot.plot(kVec,mutualVec,label='adjusted_rand_score')
     c =pyplot.plot(kVec,vmeasureVec,label='adjusted_rand_score')
     
@@ -124,8 +124,8 @@ if __name__ == "__main__":
     # la question 1B pour déterminer les étiquettes de classe, avant de passer
     # les résultats aux différentes métriques!
     def evalEM(X, y, k, init):
-        GM = GaussianMixture(n_clusters=k)
-        y_predict = GM.fit_predict(X,y)
+        GM = GaussianMixture(n_components=k, init_params='random').fit(X,y)
+        y_predict = GM.predict(X)
         mesureV = v_measure_score(y,y_predict)
         randAjustee = adjusted_rand_score(y,y_predict)
         infoMutuelle = adjusted_mutual_info_score(y,y_predict)
@@ -139,12 +139,27 @@ if __name__ == "__main__":
     # Tracez les résultats obtenus sous forme de courbe
     # Notez que ce calcul est assez long et devrait requérir au moins 120 secondes;
     # la limite de temps qui vous est accordée est beaucoup plus laxiste.
+    
+    randVec = []
+    mutualVec = []
+    vmeasureVec = []
     for k in range(2, 51, 2):
         rand, mutual_information, v_measure = evalEM(X, y, k, 'random')
+        randVec.append(rand)
+        mutualVec.append(mutual_information)
+        vmeasureVec.append(v_measure)
 
     _times.append(time.time())
     checkTime(TMAX_Q1B, "1B")
-
+    pyplot.xlabel('Nombre de clusters k')
+    pyplot.ylabel('Score')
+    
+    a = pyplot.plot(kVec,randVec,label='adjusted_rand_score' )
+    b = pyplot.plot(kVec,mutualVec,label='adjusted_rand_score')
+    c = pyplot.plot(kVec,vmeasureVec,label='adjusted_rand_score')
+    
+    pyplot.legend([a,b,c], ['adjusted_rand_score', 'adjusted_mutual_info_score', 'v_measure_score'])
+    
     # On affiche la courbe obtenue
     pyplot.show()
 
