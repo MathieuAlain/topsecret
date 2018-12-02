@@ -113,7 +113,7 @@ if __name__ == "__main__":
     fig.show()
     n_estimators_count = 1
     for predictions in clf.staged_predict(X_test):
-        if n_estimators_count % n_estimators // 3 == 0:
+        if n_estimators_count % (n_estimators // 3) == 0:
             x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
             y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
             xx, yy = numpy.meshgrid(
