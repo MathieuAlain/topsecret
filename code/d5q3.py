@@ -150,6 +150,28 @@ if __name__ == "__main__":
     # Entraînez un classifieur par ensemble de type Random Forest sur le jeu de données (X_train, y_train)
     # défini plus haut. Rapportez les résultats et figures tel que demandé dans l'énoncé, sur
     # les jeux d'entraînement et de test.
+    n_estimators = 50
+    max_depths = range(1, 13)
+    train_scores = []
+    test_scores = []
+    for max_depth in max_depths:
+        clf = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth)
+        clf.fit(X_train, y_train)
+        score = clf.score(X_train, y_train)
+        train_scores.append(score)
+        print(f"Random forest train score with max depth {max_depth}: {score}.")
+        score = clf.score(X_test, y_test)
+        test_scores.append(score)
+        print(f"Random forest test score with max depth {max_depth}: {score}.")
+    fig, ax = pyplot.subplots()
+    ax.plot(max_depths, train_scores, label="Entraînement")
+    ax.plot(max_depths, test_scores, label="Test")
+    ax.set_xlabel("Profondeur maximale utilisée")
+    ax.set_ylabel("Performance")
+    ax.legend()
+    # matplotlib2tikz.save("random_forest_scores.pgf")
+    ax.set_title("Performances obtenues avec des forêts d'arbres de décision")
+    fig.show()
 
     _times.append(time.time())
     checkTime(TMAX_Q3C, "3C")
