@@ -112,7 +112,7 @@ La table~\ref{tab:adaboost_scores_with_decision_stumps} donne les performances o
 \end{figure}
 \directlua{dofile("decision_stump_figures.lua")}
 
-La table~\ref{tab:adaboost_scores_with_decision_trees} donne les performances obtenues en utilisant des arbres de décision à trois niveaux comme classifieur de base.
+La table~\ref{tab:adaboost_scores_with_decision_trees} donne les performances obtenues en utilisant des arbres de décision à trois niveaux comme classifieur de base. La performance en entraînement est dans la figure~\ref{fig:adaboost_train_scores_with_decision_trees} et la performance en test dans la figure~\ref{fig:adaboost_test_scores_with_decision_trees}. Les régions de décision avec \numprint{16}, \numprint{32} et \numprint{48} classifieurs sont montrées dans les figures \ref{fig:adaboost_decision_regions_with_decision_trees_16}, \ref{fig:adaboost_decision_regions_with_decision_trees_32} et \ref{fig:adaboost_decision_regions_with_decision_trees_48}.
 \begin{table}
 	\centering
 	\caption{Performance en entraînement et en test avec AdaBoost avec des arbres de décision à trois niveaux}
