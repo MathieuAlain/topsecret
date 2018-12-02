@@ -168,6 +168,8 @@ La table~\ref{tab:adaboost_scores_with_decision_trees} donne les performances ob
 \end{figure}
 \directlua{dofile("decision_tree_figures.lua")}
 
+Il n'est pas suffisant d'utiliser des souches de décision comme classifieur de base sur le jeu de données à quatre classes. On obtient de meilleures performances avec des arbres de décision à trois niveaux. La meilleure performance est obtenue en utilisant \numprint{35} classifieurs avec des arbres de décision à trois niveaux.
+
 \section{Réduction de dimensionnalité}
 
 \end{document}
