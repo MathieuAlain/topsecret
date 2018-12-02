@@ -95,14 +95,15 @@ if __name__ == "__main__":
         mutualVec.append(mutual_information)
         vmeasureVec.append(v_measure)
         
-    fig, axs = pyplot.subplots(1, 3, constrained_layout=True)
+    fig, axs = pyplot.subplots(3, 1, constrained_layout=True)
     axs[0].set_xlabel('Nombre de clusters k')
     axs[0].set_ylabel('Score')
     axs[0].set_title("Question 1-A")
-    axs[0].plot(kVec,randVec,label='adjusted_rand_score', )
-    axs[0].plot(kVec,mutualVec,label='adjusted_rand_score')
-    axs[0].plot(kVec,vmeasureVec,label='adjusted_rand_score')
-        
+    axs[0].plot(kVec,randVec,label='adjusted rand')
+    axs[0].plot(kVec,mutualVec,label='mutual information')
+    axs[0].plot(kVec,vmeasureVec,label='v measure')
+    axs[0].legend()
+    
     _times.append(time.time())
     checkTime(TMAX_Q1A, "1A")
 
@@ -143,7 +144,7 @@ if __name__ == "__main__":
     mutualVec = []
     vmeasureVec = []
     for k in range(2, 51, 2):
-        rand, mutual_information, v_measure = evalEM(X, y, k, 'kmeans')
+        rand, mutual_information, v_measure = evalEM(X, y, k, 'random')
         randVec.append(rand)
         mutualVec.append(mutual_information)
         vmeasureVec.append(v_measure)
@@ -153,9 +154,10 @@ if __name__ == "__main__":
     axs[1].set_xlabel('Nombre de clusters k')
     axs[1].set_ylabel('Score')
     axs[1].set_title("Question 1-B")    
-    axs[1].plot(kVec,randVec,label='adjusted_rand_score' )
-    axs[1].plot(kVec,mutualVec,label='adjusted_rand_score')
-    axs[1].plot(kVec,vmeasureVec,label='adjusted_rand_score')
+    axs[1].plot(kVec,randVec,label='adjusted rand')
+    axs[1].plot(kVec,mutualVec,label='mutual information')
+    axs[1].plot(kVec,vmeasureVec,label='v measure')
+    axs[1].legend()
     
     # On affiche la courbe obtenue
     #pyplot.show()
@@ -173,7 +175,7 @@ if __name__ == "__main__":
     mutualVec = []
     vmeasureVec = []
     for k in range(2, 51, 2):
-        rand, mutual_information, v_measure = evalEM(X, y, k, 'random')
+        rand, mutual_information, v_measure = evalEM(X, y, k, 'kmeans')
         randVec.append(rand)
         mutualVec.append(mutual_information)
         vmeasureVec.append(v_measure)
@@ -183,10 +185,11 @@ if __name__ == "__main__":
     axs[2].set_xlabel('Nombre de clusters k')
     axs[2].set_ylabel('Score')
     axs[2].set_title("Question 1-C")    
-    axs[2].plot(kVec,randVec,label='adjusted_rand_score' )
-    axs[2].plot(kVec,mutualVec,label='adjusted_rand_score')
-    axs[2].plot(kVec,vmeasureVec,label='adjusted_rand_score')
-    
+    axs[2].plot(kVec,randVec,label='adjusted rand')
+    axs[2].plot(kVec,mutualVec,label='mutual information')
+    axs[2].plot(kVec,vmeasureVec,label='v measure')
+    axs[2].legend()
+       
     
     _times.append(time.time())
     checkTime(TMAX_Q1C, "1C")
