@@ -70,7 +70,7 @@ def train_adaboost(max_depth):
     ax.plot(range(1, n_estimators + 1), scores)
     ax.set_xlabel("Nombre de classifieurs de base")
     ax.set_ylabel("Performance en entraînement")
-    # matplotlib2tikz.save("train_scores_{max_depth}.pgf")
+    # matplotlib2tikz.save(f"train_scores_{max_depth}.pgf")
     ax.set_title(f"Performance en entraînement avec AdaBoost utilisant des arbres de profondeur {max_depth}")
     fig.show()
     scores = []
@@ -83,7 +83,7 @@ def train_adaboost(max_depth):
     ax.plot(range(1, n_estimators + 1), scores)
     ax.set_xlabel("Nombre de classifieurs de base")
     ax.set_ylabel("Performance en test")
-    # matplotlib2tikz.save("test_scores_{max_depth}.pgf")
+    # matplotlib2tikz.save(f"test_scores_{max_depth}.pgf")
     ax.set_title(f"Performance en test avec AdaBoost utilisant des arbres de profondeur {max_depth}")
     fig.show()
     n_estimators_count = 1
