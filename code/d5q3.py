@@ -23,6 +23,7 @@
 
 import time
 import numpy
+# import matplotlib2tikz
 
 import warnings
 # Nous ne voulons pas avoir ce type d'avertissement, qui
@@ -92,9 +93,10 @@ if __name__ == "__main__":
         n_estimators_count += 1
     fig, ax = pyplot.subplots()
     ax.plot(range(1, n_estimators + 1), scores)
-    ax.set_title("Performance en entraînement avec AdaBoost")
     ax.set_xlabel("Nombre de classifieurs de base")
     ax.set_ylabel("Performance en entraînement")
+    # matplotlib2tikz.save("train_scores.pgf")
+    ax.set_title("Performance en entraînement avec AdaBoost")
     fig.show()
     scores = []
     n_estimators_count = 1
@@ -104,9 +106,10 @@ if __name__ == "__main__":
         n_estimators_count += 1
     fig, ax = pyplot.subplots()
     ax.plot(range(1, n_estimators + 1), scores)
-    ax.set_title("Performance en test avec AdaBoost")
     ax.set_xlabel("Nombre de classifieurs de base")
     ax.set_ylabel("Performance en test")
+    # matplotlib2tikz.save("test_scores.pgf")
+    ax.set_title("Performance en test avec AdaBoost")
     fig.show()
     n_estimators_count = 1
     for predictions in clf.staged_predict(X_test):
@@ -122,6 +125,7 @@ if __name__ == "__main__":
             Z = Z.reshape(xx.shape)
             ax.contourf(xx, yy, Z, alpha=0.4)
             ax.scatter(X[:, 0], X[:, 1], c=y, s=20, edgecolor='k')
+            # matplotlib2tikz.save(f"decision_regions_{n_estimators_count}.pgf")
             ax.set_title(f"Régions de décision générées par AdaBoost avec {n_estimators_count} estimateurs")
             fig.show()
         n_estimators_count += 1
