@@ -112,17 +112,7 @@ On a utilisé un classifieur par ensemble basé sur AdaBoost sur le jeu de donn�
 	\label{fig:adaboost_test_scores_with_decision_stumps}
 \end{figure}
 
-% \directlua{
-% 	for n_estimators = 1, 3 do
-% 		tex.print(string.format([[
-% 			\begin{figure}
-% 				\centering
-% 				\input{figures/3a/decision_stumps/decision_regions_%d.pgf}
-% 				\caption{Régions de décision générées par AdaBoost avec des souches de décision et %d classifieurs}
-% 				\label{fig:adaboost_decision_regions_with_decision_stumps_%d}
-% 		]], i)
-% 	end
-% }
+\directlua{dofile("decision_stump_figures.lua")}
 
 \section{Réduction de dimensionnalité}
 
