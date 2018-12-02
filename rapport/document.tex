@@ -54,6 +54,8 @@
 
 \section{Méthodes par ensemble}
 
+\subsection{Classement avec AdaBoost}
+
 On a utilisé un classifieur par ensemble basé sur AdaBoost sur le jeu de données à quatre classes avec un maximum de \numprint{50} classifieurs de base, avec des souches de décision et avec des arbres de décision à trois niveaux.
 
 La table~\ref{tab:adaboost_scores_with_decision_stumps} donne les performances obtenues avec des souches de décision. La performance en entraînement est dans la figure~\ref{fig:adaboost_train_scores_with_decision_stumps} et la performance en test dans la figure~\ref{fig:adaboost_test_scores_with_decision_stumps}. Les régions de décision avec \numprint{16}, \numprint{32} et \numprint{48} classifieurs sont montrées dans les figures \ref{fig:adaboost_decision_regions_with_decision_stumps_16}, \ref{fig:adaboost_decision_regions_with_decision_stumps_32} et \ref{fig:adaboost_decision_regions_with_decision_stumps_48}.
@@ -170,6 +172,8 @@ La table~\ref{tab:adaboost_scores_with_decision_trees} donne les performances ob
 
 Il n'est pas suffisant d'utiliser des souches de décision comme classifieur de base sur le jeu de données à quatre classes. On obtient de meilleures performances avec des arbres de décision à trois niveaux. La meilleure performance est obtenue en utilisant \numprint{35} classifieurs avec des arbres de décision à trois niveaux.
 
+\subsection{Classement avec forêts aléatoires}
+
 \begin{table}
 	\centering
 	\caption{Performances obtenues avec des forêts d'arbres de décision}
@@ -195,6 +199,12 @@ Il n'est pas suffisant d'utiliser des souches de décision comme classifieur de 
 	\end{tabular}
 	\label{tab:random_forest_scores}
 \end{table}
+\begin{figure}
+	\centering
+	\input{figures/3c/random_forest_scores.pgf}
+	\caption{Performances obtenues avec des forêts d'arbres de décision}
+	\label{fig:random_forest_scores}
+\end{figure}
 
 \section{Réduction de dimensionnalité}
 

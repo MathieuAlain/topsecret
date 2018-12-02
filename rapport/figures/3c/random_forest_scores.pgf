@@ -1,0 +1,54 @@
+% This file was created by matplotlib2tikz v0.6.18.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.12156862745098,0.466666666666667,0.705882352941177}
+\definecolor{color1}{rgb}{1,0.498039215686275,0.0549019607843137}
+
+\begin{axis}[
+legend cell align={left},
+legend entries={{Entraînement},{Test}},
+legend style={at={(0.03,0.97)}, anchor=north west, draw=white!80.0!black},
+tick align=outside,
+tick pos=left,
+x grid style={white!69.01960784313725!black},
+xlabel={Profondeur maximale utilisée},
+xmin=0.45, xmax=12.55,
+y grid style={white!69.01960784313725!black},
+ylabel={Performance},
+ymin=0.5813125, ymax=1.0199375
+]
+\addlegendimage{no markers, color0}
+\addlegendimage{no markers, color1}
+\addplot [semithick, color0]
+table [row sep=\\]{%
+1	0.60125 \\
+2	0.7675 \\
+3	0.89125 \\
+4	0.915 \\
+5	0.93125 \\
+6	0.93875 \\
+7	0.96 \\
+8	0.97875 \\
+9	0.98625 \\
+10	0.99375 \\
+11	0.9975 \\
+12	1 \\
+};
+\addplot [semithick, color1]
+table [row sep=\\]{%
+1	0.645 \\
+2	0.7525 \\
+3	0.885 \\
+4	0.8875 \\
+5	0.9125 \\
+6	0.93 \\
+7	0.9275 \\
+8	0.9225 \\
+9	0.925 \\
+10	0.9275 \\
+11	0.9225 \\
+12	0.9225 \\
+};
+\end{axis}
+
+\end{tikzpicture}
