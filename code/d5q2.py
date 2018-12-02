@@ -70,9 +70,9 @@ if __name__ == "__main__":
     # et que vous l'avez extrait dans le répertoire courant, de telle façon
     # qu'un dossier nommé "csdmc-spam-binary" soit présent.
 
-    X = numpy.loadtxt("csdmc-spam-binary/data", delimiter=",")
-    y = numpy.loadtxt("csdmc-spam-binary/target", delimiter=",")
-    with open("csdmc-spam-binary/features", "r") as f:
+    X = numpy.loadtxt("data/csdmc-spam-binary/data", delimiter=",")
+    y = numpy.loadtxt("data/csdmc-spam-binary/target", delimiter=",")
+    with open("data/csdmc-spam-binary/features", "r") as f:
         features = [line[:-1] for line in f]
 
     # Division du jeu en entraînement / test
@@ -83,7 +83,11 @@ if __name__ == "__main__":
     # TODO Q2A
     # Entraînez un classifieur SVM linéaire sur le jeu de données *complet*
     # et rapportez sa performance en test
-
+    svm = LinearSVC()
+    svm.fit(X,y)
+    #y_pred = svm.predict(X)
+    accuracy = 1-svm.score(X,y)
+    print("Score du svm sur tout le jeu de données : " , accuracy)
     _times.append(time.time())
     checkTime(TMAX_Q2Aall, "2A (avec toutes les variables)")
 
@@ -91,7 +95,12 @@ if __name__ == "__main__":
     # Entraînez un classifieur SVM linéaire sur le jeu de données
     # en réduisant le nombre de caractéristiques (features) à 10 en
     # utilisant le chi² comme métrique et rapportez sa performance en test
-
+    ch2 = SelectKBest(chi2, k=10)
+    X_train = ch2.fit_transform(X_train, y_train)
+    X_test = ch2.transform(X_test)
+    svm.fit(X_train,y_train)
+    accuracy = 1-svm.score(X_test,y_test)
+    print("Score du svm sur avec sélection de caractéristiques : ", accuracy)
     _times.append(time.time())
     checkTime(TMAX_Q2Achi, "2A (avec sous-ensemble de variables par chi2)")
 
@@ -99,7 +108,7 @@ if __name__ == "__main__":
     # Entraînez un classifieur SVM linéaire sur le jeu de données
     # en réduisant le nombre de caractéristiques (features) à 10 en utilisant
     # l'information mutuelle comme métrique et rapportez sa performance en test
-
+    
     _times.append(time.time())
     checkTime(TMAX_Q2Amut, "2A (avec sous-ensemble de variables par mutual info)")
 
