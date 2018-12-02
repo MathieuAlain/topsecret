@@ -57,7 +57,6 @@
 On a utilisé un classifieur par ensemble basé sur AdaBoost sur le jeu de données à quatre classes avec un maximum de \numprint{50} classifieurs de base, avec des souches de décision et avec des arbres de décision à trois niveaux.
 
 La table~\ref{tab:adaboost_scores_with_decision_stumps} donne les performances obtenues avec des souches de décision. La performance en entraînement est dans la figure~\ref{fig:adaboost_train_scores_with_decision_stumps} et la performance en test dans la figure~\ref{fig:adaboost_test_scores_with_decision_stumps}. Les régions de décision avec \numprint{16}, \numprint{32} et \numprint{48} classifieurs sont montrées dans les figures \ref{fig:adaboost_decision_regions_with_decision_stumps_16}, \ref{fig:adaboost_decision_regions_with_decision_stumps_32} et \ref{fig:adaboost_decision_regions_with_decision_stumps_48}.
-
 \begin{table}
 	\centering
 	\caption{Performance en entraînement et en test avec AdaBoost avec des souches de décision}
@@ -99,25 +98,21 @@ La table~\ref{tab:adaboost_scores_with_decision_stumps} donne les performances o
 	\end{tabular}
 	\label{tab:adaboost_scores_with_decision_stumps}
 \end{table}
-
 \begin{figure}
 	\centering
 	\input{figures/3a/decision_stumps/train_scores.pgf}
 	\caption{Performance en entraînement avec AdaBoost avec des souches de décision}
 	\label{fig:adaboost_train_scores_with_decision_stumps}
 \end{figure}
-
 \begin{figure}
 	\centering
 	\input{figures/3a/decision_stumps/test_scores.pgf}
 	\caption{Performance en test avec AdaBoost avec des souches de décision}
 	\label{fig:adaboost_test_scores_with_decision_stumps}
 \end{figure}
-
 \directlua{dofile("decision_stump_figures.lua")}
 
 La table~\ref{tab:adaboost_scores_with_decision_trees} donne les performances obtenues en utilisant des arbres de décision à trois niveaux comme classifieur de base.
-
 \begin{table}
 	\centering
 	\caption{Performance en entraînement et en test avec AdaBoost avec des arbres de décision à trois niveaux}
@@ -159,6 +154,19 @@ La table~\ref{tab:adaboost_scores_with_decision_trees} donne les performances ob
 	\end{tabular}
 	\label{tab:adaboost_scores_with_decision_trees}
 \end{table}
+\begin{figure}
+	\centering
+	\input{figures/3a/decision_trees/train_scores.pgf}
+	\caption{Performance en entraînement avec AdaBoost avec des arbres de décision à trois niveaux}
+	\label{fig:adaboost_train_scores_with_decision_trees}
+\end{figure}
+\begin{figure}
+	\centering
+	\input{figures/3a/decision_trees/test_scores.pgf}
+	\caption{Performance en test avec AdaBoost avec des arbres de décision à trois niveaux}
+	\label{fig:adaboost_test_scores_with_decision_trees}
+\end{figure}
+\directlua{dofile("decision_tree_figures.lua")}
 
 \section{Réduction de dimensionnalité}
 
