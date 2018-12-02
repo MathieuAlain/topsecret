@@ -80,7 +80,13 @@ if __name__ == "__main__":
     # TODO Q4
     # Écrivez le code permettant de projeter le jeu de données en 2 dimensions
     # avec les classes scikit-learn suivantes : PCA, MDS et TSNE
-
+    #savepath = 
+    title = "Données réduites à 2 dimensions"
+    pca = PCA(n_component = 2)
+    X_red = pca.fit_transform(X)
+    labels = numpy.zeros(X_red.shape[0])
+    #labels = 
+    
     # TODO Q4
     # Calculez le ratio entre la distance moyenne intra-classe et la distance moyenne
     # inter-classe, pour chacune des classes, pour chacune des méthodes, y compris
