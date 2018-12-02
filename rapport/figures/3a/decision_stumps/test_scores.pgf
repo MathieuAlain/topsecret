@@ -11,7 +11,9 @@ xlabel={Nombre de classifieurs de base},
 xmin=-1.45, xmax=52.45,
 y grid style={white!69.01960784313725!black},
 ylabel={Performance en test},
-ymin=0.433625, ymax=0.628875
+ymin=0.433625, ymax=0.628875,
+/pgf/number format/.cd,
+use comma,
 ]
 \addplot [semithick, color0, forget plot]
 table [row sep=\\]{%
