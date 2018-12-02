@@ -55,6 +55,55 @@ TMAX_Q3C = 130
 
 # Ne modifiez rien avant cette ligne!
 
+def train_adaboost(max_depth):
+    print(f"\nTraining AdaBoost with decision trees of depth {max_depth}")
+    n_estimators = 50
+    clf = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=max_depth), n_estimators=n_estimators)
+    clf.fit(X_train, y_train)
+    scores = []
+    n_estimators_count = 1
+    for score in clf.staged_score(X_train, y_train):
+        print(f"AdaBoost train score with {n_estimators_count} estimators: {score}.")
+        scores.append(score)
+        n_estimators_count += 1
+    fig, ax = pyplot.subplots()
+    ax.plot(range(1, n_estimators + 1), scores)
+    ax.set_xlabel("Nombre de classifieurs de base")
+    ax.set_ylabel("Performance en entraînement")
+    # matplotlib2tikz.save("train_scores_{max_depth}.pgf")
+    ax.set_title(f"Performance en entraînement avec AdaBoost utilisant des arbres de profondeur {max_depth}")
+    fig.show()
+    scores = []
+    n_estimators_count = 1
+    for score in clf.staged_score(X_test, y_test):
+        print(f"AdaBoost test score with {n_estimators_count} estimators: {score}.")
+        scores.append(score)
+        n_estimators_count += 1
+    fig, ax = pyplot.subplots()
+    ax.plot(range(1, n_estimators + 1), scores)
+    ax.set_xlabel("Nombre de classifieurs de base")
+    ax.set_ylabel("Performance en test")
+    # matplotlib2tikz.save("test_scores_{max_depth}.pgf")
+    ax.set_title(f"Performance en test avec AdaBoost utilisant des arbres de profondeur {max_depth}")
+    fig.show()
+    n_estimators_count = 1
+    for predictions in clf.staged_predict(X_test):
+        if n_estimators_count % (n_estimators // 3) == 0:
+            x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+            y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+            xx, yy = numpy.meshgrid(
+                numpy.arange(x_min, x_max, 0.1),
+                numpy.arange(y_min, y_max, 0.1)
+            )
+            fig, ax = pyplot.subplots()
+            Z = clf.predict(numpy.c_[xx.ravel(), yy.ravel()])
+            Z = Z.reshape(xx.shape)
+            ax.contourf(xx, yy, Z, alpha=0.4)
+            ax.scatter(X[:, 0], X[:, 1], c=y, s=20, edgecolor='k')
+            # matplotlib2tikz.save(f"decision_regions_{n_estimators_count}_{max_depth}.pgf")
+            ax.set_title(f"Régions de décision générées par AdaBoost avec {n_estimators_count} estimateurs et des arbres de profondeur {max_depth}")
+            fig.show()
+        n_estimators_count += 1
 
 if __name__ == "__main__":
     # Question 3
@@ -73,7 +122,7 @@ if __name__ == "__main__":
     y = numpy.concatenate((y1, y2 + 2, y3 + 1))
 
     # Division du jeu en entraînement / test
-    # Ne modifiez pas la random seed
+    # Ne modifiez pas la random seedbase_estimator
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.333, random_state=42)
 
     _times.append(time.time())
@@ -82,53 +131,7 @@ if __name__ == "__main__":
     # défini plus haut, en utilisant des souches de décision comme classifieur de base.
     # Rapportez les résultats et figures tel que demandé dans l'énoncé, sur
     # les jeux d'entraînement et de test.
-    n_estimators = 50
-    clf = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=1), n_estimators=n_estimators)
-    clf.fit(X_train, y_train)
-    scores = []
-    n_estimators_count = 1
-    for score in clf.staged_score(X_train, y_train):
-        print(f"AdaBoost train score with {n_estimators_count} estimators: {score}.")
-        scores.append(score)
-        n_estimators_count += 1
-    fig, ax = pyplot.subplots()
-    ax.plot(range(1, n_estimators + 1), scores)
-    ax.set_xlabel("Nombre de classifieurs de base")
-    ax.set_ylabel("Performance en entraînement")
-    # matplotlib2tikz.save("train_scores.pgf")
-    ax.set_title("Performance en entraînement avec AdaBoost")
-    fig.show()
-    scores = []
-    n_estimators_count = 1
-    for score in clf.staged_score(X_test, y_test):
-        print(f"AdaBoost test score with {n_estimators_count} estimators: {score}.")
-        scores.append(score)
-        n_estimators_count += 1
-    fig, ax = pyplot.subplots()
-    ax.plot(range(1, n_estimators + 1), scores)
-    ax.set_xlabel("Nombre de classifieurs de base")
-    ax.set_ylabel("Performance en test")
-    # matplotlib2tikz.save("test_scores.pgf")
-    ax.set_title("Performance en test avec AdaBoost")
-    fig.show()
-    n_estimators_count = 1
-    for predictions in clf.staged_predict(X_test):
-        if n_estimators_count % (n_estimators // 3) == 0:
-            x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-            y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-            xx, yy = numpy.meshgrid(
-                numpy.arange(x_min, x_max, 0.1),
-                numpy.arange(y_min, y_max, 0.1)
-            )
-            fig, ax = pyplot.subplots()
-            Z = clf.predict(numpy.c_[xx.ravel(), yy.ravel()])
-            Z = Z.reshape(xx.shape)
-            ax.contourf(xx, yy, Z, alpha=0.4)
-            ax.scatter(X[:, 0], X[:, 1], c=y, s=20, edgecolor='k')
-            # matplotlib2tikz.save(f"decision_regions_{n_estimators_count}.pgf")
-            ax.set_title(f"Régions de décision générées par AdaBoost avec {n_estimators_count} estimateurs")
-            fig.show()
-        n_estimators_count += 1
+    train_adaboost(max_depth=1)
 
     _times.append(time.time())
     checkTime(TMAX_Q3Ai, "3A avec souches")
@@ -138,6 +141,7 @@ if __name__ == "__main__":
     # défini plus haut, en utilisant des arbres de décision de profonduer 3 comme
     # classifieur de base. Rapportez les résultats et figures tel que demandé dans l'énoncé, sur
     # les jeux d'entraînement et de test.
+    train_adaboost(max_depth=3)
 
     _times.append(time.time())
     checkTime(TMAX_Q3Aii, "3A avec arbres de profondeur 3")
