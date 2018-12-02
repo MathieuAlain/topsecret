@@ -170,6 +170,32 @@ La table~\ref{tab:adaboost_scores_with_decision_trees} donne les performances ob
 
 Il n'est pas suffisant d'utiliser des souches de décision comme classifieur de base sur le jeu de données à quatre classes. On obtient de meilleures performances avec des arbres de décision à trois niveaux. La meilleure performance est obtenue en utilisant \numprint{35} classifieurs avec des arbres de décision à trois niveaux.
 
+\begin{table}
+	\centering
+	\caption{Performances obtenues avec des forêts d'arbres de décision}
+	\begin{tabular}{S S S S S S}
+		\toprule
+			{Profondeur maximale}
+			& {Performance en entraînement}
+			& {Performance en test} \\
+		\midrule
+			1 & 0.60125 & 0.6475 \\
+			2 & 0.7025 & 0.715 \\
+			3 & 0.89 & 0.8775 \\
+			4 & 0.9125 & 0.8975 \\
+			5 & 0.93125 & 0.9125 \\
+			6 & 0.94125 & 0.9225 \\
+			7 & 0.9625 & 0.9275 \\
+			8 & 0.97875 & 0.9075 \\
+			9 & 0.985 & 0.925 \\
+			10 & 0.99625 & 0.9225 \\
+			11 & 0.9975 & 0.925 \\
+			12 & 0.99625 & 0.925 \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:random_forest_scores}
+\end{table}
+
 \section{Réduction de dimensionnalité}
 
 \end{document}
