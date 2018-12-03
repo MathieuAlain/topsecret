@@ -4,6 +4,11 @@
 \usepackage{amsmath}
 \usepackage{numprint}
 \usepackage{booktabs}
+\usepackage[
+	mono,
+	DefaultFeatures={
+		Scale = MatchLowercase
+	}]{plex-otf}
 \usepackage[locale=FR]{siunitx}
 \usepackage{pgf}
 \usepackage{pgfplots}
@@ -13,14 +18,11 @@
 
 \raggedbottom
 
-\pgfplotsset{compat=newest}
+\pgfplotsset{compat=1.16}
 
 \setmainfont{STIX Two Text}[
     Numbers = {OldStyle, Proportional},
     Scale = 0.91
-]
-\setmonofont{LucidaSansTypewriterOT}[
-    Scale = MatchLowercase
 ]
 \setmathfont{STIX Two Math}[
     StylisticSet = 8,

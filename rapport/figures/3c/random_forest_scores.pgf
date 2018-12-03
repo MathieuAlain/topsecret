@@ -15,7 +15,9 @@ xlabel={Profondeur maximale utilisée},
 xmin=0.45, xmax=12.55,
 y grid style={white!69.01960784313725!black},
 ylabel={Performance},
-ymin=0.5813125, ymax=1.0199375
+ymin=0.5813125, ymax=1.0199375,
+/pgf/number format/.cd,
+use comma,
 ]
 \addlegendimage{no markers, color0}
 \addlegendimage{no markers, color1}
