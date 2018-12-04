@@ -129,7 +129,10 @@ if __name__ == "__main__":
     # Entraînez un classifieur SVM linéaire sur le jeu de données
     # en réduisant le nombre de caractéristiques (features) à 10 par
     # sélection séquentielle arrière et rapportez sa performance en test
-
+    estimator = LinearSVC()
+    selector = RFE(estimator, 10, step=1)
+    selector = selector.fit(X_train, y_train)
+    print("Score du svm avec sélection séquentielle arrière : ", selector.score(X_test, y_test))
     _times.append(time.time())
     checkTime(TMAX_Q2B, "2B")
 
