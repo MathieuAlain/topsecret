@@ -84,9 +84,9 @@ if __name__ == "__main__":
     # Entraînez un classifieur SVM linéaire sur le jeu de données *complet*
     # et rapportez sa performance en test
     svm = LinearSVC()
-    svm.fit(X,y)
-    #y_pred = svm.predict(X)
-    accuracy = 1-svm.score(X,y)
+    svm.fit(X_train,y_train)
+    #Performance du classifieur :
+    accuracy = 1-svm.score(X_test,y_test)
     print("Score du svm sur tout le jeu de données : " , accuracy)
     _times.append(time.time())
     checkTime(TMAX_Q2Aall, "2A (avec toutes les variables)")
@@ -96,11 +96,16 @@ if __name__ == "__main__":
     # en réduisant le nombre de caractéristiques (features) à 10 en
     # utilisant le chi² comme métrique et rapportez sa performance en test
     ch2 = SelectKBest(chi2, k=10)
-    X_train = ch2.fit_transform(X_train, y_train)
-    X_test = ch2.transform(X_test)
-    svm.fit(X_train,y_train)
-    accuracy = 1-svm.score(X_test,y_test)
-    print("Score du svm sur avec sélection de caractéristiques : ", accuracy)
+    #print(X_train.shape[1])
+    X_train_ch2 = ch2.fit_transform(X_train, y_train)
+    X_test_ch2 = ch2.transform(X_test)
+    #print(X_train_ch2.shape[1])
+    svm.fit(X_train_ch2, y_train)
+    accuracy_ch2 = 1-svm.score(X_test_ch2, y_test)
+    print("Score du svm avec sélection de caractéristiques sur critère du chi2 : ", accuracy_ch2)
+    # keep selected feature names
+    selected_features = [features[i] for i in ch2.get_support(indices=True)]
+    print("Caractéristiques sélectionnées par la méthode du chi2 :\n", selected_features)
     _times.append(time.time())
     checkTime(TMAX_Q2Achi, "2A (avec sous-ensemble de variables par chi2)")
 
@@ -108,7 +113,15 @@ if __name__ == "__main__":
     # Entraînez un classifieur SVM linéaire sur le jeu de données
     # en réduisant le nombre de caractéristiques (features) à 10 en utilisant
     # l'information mutuelle comme métrique et rapportez sa performance en test
-    
+    mutualInfo = SelectKBest(mutual_info_classif, k=10)
+    X_train_mi = mutualInfo.fit_transform(X_train, y_train)
+    X_test_mi = mutualInfo.transform(X_test)
+    svm.fit(X_train_mi, y_train)
+    accuracy_mi = 1-svm.score(X_test_mi, y_test)
+    print("Score du svm avec sélection de caractéristiques selon l'information mutuelle : ", accuracy_mi)
+    # keep selected feature names
+    selected_features_mi = [features[i] for i in mutualInfo.get_support(indices=True)]
+    print("Caractéristiques sélectionnées par la méthode de l'information mutuelle :\n", selected_features_mi)
     _times.append(time.time())
     checkTime(TMAX_Q2Amut, "2A (avec sous-ensemble de variables par mutual info)")
 
